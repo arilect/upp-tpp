@@ -1,0 +1,336 @@
+{
+  "name": "vscode-tpp-preview",
+  "displayName": "UPP TPP Preview",
+  "description": "Preview UPP Topic++ (.tpp) rich text files",
+  "version": "0.1.0",
+  "publisher": "upp",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Other"
+  ],
+  "activationEvents": [
+    "onLanguage:tpp",
+    "workspaceContains:**/*.tpp"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "tpp",
+        "aliases": [
+          "Topic++",
+          "tpp"
+        ],
+        "extensions": [
+          ".tpp"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "customEditors": [
+      {
+        "viewType": "tpp.preview",
+        "displayName": "TPP Preview",
+        "selector": [
+          {
+            "filenamePattern": "*.tpp"
+          }
+        ],
+        "priority": "default"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "tpp-topics",
+          "title": "Topic++",
+          "icon": "media/book-icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "tpp-topics": [
+        {
+          "id": "tpp.ideSource",
+          "name": "TheIDE Source",
+          "type": "webview"
+        },
+        {
+          "id": "tpp.topicSearch",
+          "name": "Search",
+          "type": "webview"
+        },
+        {
+          "id": "tpp.topicTree",
+          "name": "Topics"
+        }
+      ],
+      "explorer": [
+        {
+          "id": "tpp.explorerTopics",
+          "name": "Topic++"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "tpp.openPreview",
+        "title": "Open TPP Preview",
+        "category": "TPP"
+      },
+      {
+        "command": "tpp.searchHeadings",
+        "title": "Search Topic Headings",
+        "category": "TPP"
+      },
+      {
+        "command": "tpp.searchFullText",
+        "title": "Search Topics (Full Text)",
+        "category": "TPP"
+      },
+      {
+        "command": "tpp.tableOfContents",
+        "title": "Topic Table of Contents",
+        "category": "TPP"
+      },
+      {
+        "command": "tpp.refreshTree",
+        "title": "Refresh Topic Tree",
+        "category": "TPP",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "tpp.copyTopicPath",
+        "title": "Copy Topic Path",
+        "category": "TPP",
+        "icon": "$(copy)"
+      }
+    ],
+    "menus": {
+      "view/item/context": [
+        {
+          "command": "tpp.copyTopicPath",
+          "when": "viewItem == tppTopic",
+          "group": "inline"
+        },
+        {
+          "command": "tpp.copyTopicPath",
+          "when": "viewItem == tppTopic",
+          "group": "1_modification"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "TPP Preview",
+      "properties": {
+        "tpp.fontSize": {
+          "type": "number",
+          "default": 18,
+          "description": "Base font size in pixels (deprecated, use tpp.size0)"
+        },
+        "tpp.fontFamily": {
+          "type": "string",
+          "default": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+          "description": "Body font family"
+        },
+        "tpp.codeFontFamily": {
+          "type": "string",
+          "default": "Cascadia Code, Fira Code, monospace",
+          "description": "Code/monospace font family"
+        },
+        "tpp.lineHeight": {
+          "type": "number",
+          "default": 1.6,
+          "description": "Line height"
+        },
+        "tpp.textColor": {
+          "type": "string",
+          "default": "#d4d4d4",
+          "description": "Text color"
+        },
+        "tpp.backgroundColor": {
+          "type": "string",
+          "default": "#1e1e1e",
+          "description": "Background color"
+        },
+        "tpp.headingColor": {
+          "type": "string",
+          "default": "#569cd6",
+          "description": "Heading color"
+        },
+        "tpp.linkColor": {
+          "type": "string",
+          "default": "#4ec9b0",
+          "description": "Link color"
+        },
+        "tpp.codeBackground": {
+          "type": "string",
+          "default": "#2d2d2d",
+          "description": "Code block background color"
+        },
+        "tpp.borderColor": {
+          "type": "string",
+          "default": "#3c3c3c",
+          "description": "Table border and separator color"
+        },
+        "tpp.keywordColor": {
+          "type": "string",
+          "default": "#569cd6",
+          "description": "Color for QTF keyword highlights (bool, virtual, const, class, etc.)"
+        },
+        "tpp.paramColor": {
+          "type": "string",
+          "default": "#ff0000",
+          "description": "Color for QTF highlighted parameter names"
+        },
+        "tpp.codeColor": {
+          "type": "string",
+          "default": "#569cd6",
+          "description": "Color for monospace code text (replaces QTF @5 blue)"
+        },
+        "tpp.publishMode": {
+          "type": "boolean",
+          "default": false,
+          "description": "Generate clean publishable HTML without VS Code UI (zoom, settings, find bar)"
+        },
+        "tpp.size0": {
+          "type": "number",
+          "default": 18,
+          "description": "s0 font size in CSS pixels"
+        },
+        "tpp.size1": {
+          "type": "number",
+          "default": 24,
+          "description": "s1 font size in CSS pixels"
+        },
+        "tpp.size2": {
+          "type": "number",
+          "default": 30,
+          "description": "s2 font size in CSS pixels"
+        },
+        "tpp.size3": {
+          "type": "number",
+          "default": 36,
+          "description": "s3 font size in CSS pixels"
+        },
+        "tpp.size4": {
+          "type": "number",
+          "default": 48,
+          "description": "s4 font size in CSS pixels"
+        },
+        "tpp.size5": {
+          "type": "number",
+          "default": 60,
+          "description": "s5 font size in CSS pixels"
+        },
+        "tpp.size6": {
+          "type": "number",
+          "default": 72,
+          "description": "s6 font size in CSS pixels"
+        },
+        "tpp.size7": {
+          "type": "number",
+          "default": 84,
+          "description": "s7 font size in CSS pixels"
+        },
+        "tpp.size8": {
+          "type": "number",
+          "default": 108,
+          "description": "s8 font size in CSS pixels"
+        },
+        "tpp.size9": {
+          "type": "number",
+          "default": 144,
+          "description": "s9 font size in CSS pixels"
+        },
+        "tpp.serifFontFamily": {
+          "type": "string",
+          "default": "serif",
+          "description": "Serif font family for titles"
+        },
+        "tpp.preprocessorColor": {
+          "type": "string",
+          "default": "#8000ff",
+          "description": "Color for preprocessor directives (#include, #define)"
+        },
+        "tpp.stringColor": {
+          "type": "string",
+          "default": "#800000",
+          "description": "Color for string literals and numbers"
+        },
+        "tpp.typeColor": {
+          "type": "string",
+          "default": "#008080",
+          "description": "Color for C++ types (dword, int, etc.)"
+        },
+        "tpp.operatorColor": {
+          "type": "string",
+          "default": "#0000ff",
+          "description": "Color for operators (., :, =, &, etc.)"
+        },
+        "tpp.commentColor": {
+          "type": "string",
+          "default": "#008000",
+          "description": "Color for code comments"
+        },
+        "tpp.codeFontSize": {
+          "type": "number",
+          "default": 13,
+          "description": "Code block font size in CSS pixels"
+        },
+        "tpp.codeMarginLeft": {
+          "type": "number",
+          "default": 64,
+          "description": "Code block left margin in pixels"
+        },
+        "tpp.listMarginLeft": {
+          "type": "number",
+          "default": 45,
+          "description": "Bullet list left margin in pixels"
+        },
+        "tpp.codeRenderingMode": {
+          "type": "string",
+          "default": "vscode",
+          "enum": ["u++", "vscode"],
+          "enumDescriptions": [
+            "QTF pre-tokenized colors (U++ style)",
+            "VS Code TextMate grammar highlighting (Shiki)"
+          ],
+          "description": "Code block highlighting mode"
+        },
+        "tpp.uppsrcScanMode": {
+          "type": "string",
+          "default": "varfiles",
+          "enum": ["varfiles", "home", "custom"],
+          "enumDescriptions": [
+            "Scan UPP directories from *.var files in ~/.config/u++/theide/",
+            "Scan all uppsrc directories under ~/ (recursive)",
+            "Scan all uppsrc directories under a custom path"
+          ],
+          "description": "How to discover U++ source directories"
+        },
+        "tpp.uppsrcCustomPath": {
+          "type": "string",
+          "default": "",
+          "description": "Custom path to scan for uppsrc directories (when uppsrcScanMode is 'custom')"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.80.0",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "shiki": "^4.2.0"
+  }
+}

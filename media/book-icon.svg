@@ -1,0 +1,12 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Book icon for Topic++ activity bar -->
+  <path d="M4 4.5C4 3.12 5.12 2 6.5 2H20v20H6.5C5.12 22 4 20.88 4 19.5V4.5Z" fill="#AAAAAA" fill-opacity="0.4"/>
+  <path d="M4 4.5C4 3.12 5.12 2 6.5 2H20v20H6.5C5.12 22 4 20.88 4 19.5V4.5Z" stroke="#888888" stroke-width="1.2"/>
+  <path d="M6.5 2C5.12 2 4 3.12 4 4.5V19.5C4 20.88 5.12 22 6.5 22H20V2H6.5Z" fill="none"/>
+  <!-- Page lines -->
+  <line x1="8" y1="7" x2="16" y2="7" stroke="#CCCCCC" stroke-width="1" stroke-linecap="round"/>
+  <line x1="8" y1="10.5" x2="16" y2="10.5" stroke="#CCCCCC" stroke-width="1" stroke-linecap="round"/>
+  <line x1="8" y1="14" x2="13" y2="14" stroke="#CCCCCC" stroke-width="1" stroke-linecap="round"/>
+  <!-- Bookmark tab -->
+  <path d="M17 2V8L19 6.5L21 8V2H17Z" fill="#888888"/>
+</svg>
