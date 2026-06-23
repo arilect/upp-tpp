@@ -1,0 +1,39 @@
+# ── Source / dev files ──
+.vscode/**
+.vscode-test/**
+src/**
+out/**/*.map
+tsconfig.json
+.gitignore
+*.vsix
+QTF-summary.md
+
+# ── Dev-only packages ──
+node_modules/typescript/**
+node_modules/@types/**
+
+# ── Shiki: exclude all language/theme files, re-include only what we need ──
+node_modules/shiki/dist/langs/**
+node_modules/shiki/dist/themes/**
+node_modules/@shikijs/langs/**
+node_modules/@shikijs/themes/**
+
+# ── Re-include only the 4 languages + 1 theme we use ──
+!node_modules/shiki/dist/langs/c.mjs
+!node_modules/shiki/dist/langs/cpp.mjs
+!node_modules/shiki/dist/langs/sql.mjs
+!node_modules/shiki/dist/langs/json.mjs
+!node_modules/shiki/dist/themes/dark-plus.mjs
+!node_modules/shiki/dist/themes/light-plus.mjs
+!node_modules/@shikijs/langs/dist/c.mjs
+!node_modules/@shikijs/langs/dist/c.d.mts
+!node_modules/@shikijs/langs/dist/cpp.mjs
+!node_modules/@shikijs/langs/dist/cpp.d.mts
+!node_modules/@shikijs/langs/dist/sql.mjs
+!node_modules/@shikijs/langs/dist/sql.d.mts
+!node_modules/@shikijs/langs/dist/json.mjs
+!node_modules/@shikijs/langs/dist/json.d.mts
+!node_modules/@shikijs/themes/dist/dark-plus.mjs
+!node_modules/@shikijs/themes/dist/dark-plus.d.mts
+!node_modules/@shikijs/themes/dist/light-plus.mjs
+!node_modules/@shikijs/themes/dist/light-plus.d.mts

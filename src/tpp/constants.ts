@@ -22,6 +22,7 @@ export const SIZE_MAP_DEFAULTS: Record<string, string> = {
 };
 
 export let currentCodeRenderingMode: 'u++' | 'vscode' = 'vscode';
+export let currentShikiTheme = 'dark-plus';
 export let styleRegistry: Record<string, ParagraphStyle> = {};
 
 export let SIZE_MAP: Record<string, string> = { ...SIZE_MAP_DEFAULTS };
@@ -75,6 +76,7 @@ export function setCurrentOptions(opts: {
   keywordColor?: string;
   paramColor?: string;
   codeRenderingMode?: 'u++' | 'vscode';
+  shikiTheme?: string;
 }) {
   if (opts.sizeMap) {
     for (const k of Object.keys(opts.sizeMap)) SIZE_MAP[k] = opts.sizeMap[k];
@@ -96,6 +98,7 @@ export function setCurrentOptions(opts: {
   if (opts.keywordColor) currentKeywordColor = opts.keywordColor;
   if (opts.paramColor) currentParamColor = opts.paramColor;
   if (opts.codeRenderingMode) currentCodeRenderingMode = opts.codeRenderingMode;
+  if (opts.shikiTheme) currentShikiTheme = opts.shikiTheme;
 }
 
 export function resetStyleRegistry() {

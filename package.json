@@ -2,8 +2,12 @@
   "name": "vscode-tpp-preview",
   "displayName": "UPP TPP Preview",
   "description": "Preview UPP Topic++ (.tpp) rich text files",
-  "version": "0.1.0",
-  "publisher": "upp",
+  "version": "0.8.0",
+  "publisher": "arilect",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/arilect/upp-tpp.git"
+  },
   "engines": {
     "vscode": "^1.80.0"
   },
@@ -300,6 +304,16 @@
             "VS Code TextMate grammar highlighting (Shiki)"
           ],
           "description": "Code block highlighting mode"
+        },
+        "tpp.shikiTheme": {
+          "type": "string",
+          "default": "dark-plus",
+          "enum": ["dark-plus", "light-plus"],
+          "enumDescriptions": [
+            "Dark theme (default)",
+            "Light/white theme"
+          ],
+          "description": "Shiki syntax highlighting theme for code blocks (when codeRenderingMode is 'vscode')"
         },
         "tpp.uppsrcScanMode": {
           "type": "string",

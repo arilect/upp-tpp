@@ -208,6 +208,7 @@ export async function activate(context: vscode.ExtensionContext) {
         size8: config.get<number>('size8', 108),
         size9: config.get<number>('size9', 144),
         codeRenderingMode: config.get<'u++' | 'vscode'>('codeRenderingMode', 'vscode'),
+        shikiTheme: config.get<string>('shikiTheme', 'dark-plus'),
       };
       panel.webview.html = tppToHtml(document.getText(), undefined, options);
 
@@ -264,6 +265,7 @@ export async function activate(context: vscode.ExtensionContext) {
               size8: cfg.get<number>('size8', 108),
               size9: cfg.get<number>('size9', 144),
               codeRenderingMode: cfg.get<'u++' | 'vscode'>('codeRenderingMode', 'vscode'),
+              shikiTheme: cfg.get<string>('shikiTheme', 'dark-plus'),
               uppsrcScanMode: cfg.get<string>('uppsrcScanMode', 'varfiles'),
               uppsrcCustomPath: cfg.get<string>('uppsrcCustomPath', ''),
             };
@@ -368,6 +370,7 @@ export async function activate(context: vscode.ExtensionContext) {
           await cfg.update('size8', s.size8, vscode.ConfigurationTarget.Global);
           await cfg.update('size9', s.size9, vscode.ConfigurationTarget.Global);
           await cfg.update('codeRenderingMode', s.codeRenderingMode, vscode.ConfigurationTarget.Global);
+          await cfg.update('shikiTheme', s.shikiTheme, vscode.ConfigurationTarget.Global);
           await cfg.update('uppsrcScanMode', s.uppsrcScanMode, vscode.ConfigurationTarget.Global);
           await cfg.update('uppsrcCustomPath', s.uppsrcCustomPath, vscode.ConfigurationTarget.Global);
           const opts = {
@@ -411,6 +414,7 @@ export async function activate(context: vscode.ExtensionContext) {
             size8: cfg.get<number>('size8', 108),
             size9: cfg.get<number>('size9', 144),
             codeRenderingMode: cfg.get<'u++' | 'vscode'>('codeRenderingMode', 'vscode'),
+            shikiTheme: cfg.get<string>('shikiTheme', 'dark-plus'),
             uppsrcScanMode: cfg.get<string>('uppsrcScanMode', 'varfiles'),
             uppsrcCustomPath: cfg.get<string>('uppsrcCustomPath', ''),
           };

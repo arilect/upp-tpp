@@ -5,7 +5,7 @@ import { parseParagraphStyle, paragraphStyleToCss, isStyleDefinition } from './p
 import { processInlineContent } from './inlineParser';
 import { looksLikeCodeContent } from './codeDetector';
 import { slugify } from './escape';
-import { currentCodeRenderingMode, resetStyleRegistry, getStyleRegistry, registerStyle } from './constants';
+import { currentCodeRenderingMode, currentShikiTheme, resetStyleRegistry, getStyleRegistry, registerStyle } from './constants';
 
 function stripQtfFormatting(content: string): string {
   let result = '';
@@ -127,7 +127,7 @@ export function parseQtfContent(content: string): string {
     if (codeBuffer.length === 0) return;
     if (currentCodeRenderingMode === 'vscode' && getHighlighter()) {
       const merged = codeBuffer.join('\n');
-      const highlighted = highlightCode(merged, undefined);
+      const highlighted = highlightCode(merged, undefined, currentShikiTheme);
       html += `<div class="shiki-wrapper" style="font-family:var(--tpp-code-font);font-size:var(--tpp-code-font-size);white-space:pre-wrap;word-wrap:break-word;">${highlighted}</div>\n`;
     } else {
       for (const line of codeBuffer) {

@@ -68,6 +68,7 @@ export interface TppRenderOptions {
   listMarginLeft?: number;
   publishMode?: boolean;
   codeRenderingMode?: 'u++' | 'vscode';
+  shikiTheme?: string;
   scrollToAnchor?: string;
   size0?: number;
   size1?: number;

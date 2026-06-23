@@ -7,14 +7,14 @@ let highlighterInstance: Highlighter | null = null;
 let initPromise: Promise<Highlighter> | null = null;
 
 const LANGUAGES: BundledLanguage[] = ['cpp', 'c', 'sql', 'json'];
-const THEME: BundledTheme = 'dark-plus';
+const THEMES: BundledTheme[] = ['dark-plus', 'light-plus'];
 
 export async function initHighlighter(): Promise<Highlighter> {
   if (highlighterInstance) return highlighterInstance;
   if (initPromise) return initPromise;
 
   initPromise = createHighlighter({
-    themes: [THEME],
+    themes: THEMES,
     langs: LANGUAGES,
   }).then(h => {
     highlighterInstance = h;
@@ -44,7 +44,7 @@ export function detectLanguage(codeText: string): string {
   return 'cpp';
 }
 
-export function highlightCode(code: string, lang?: string): string {
+export function highlightCode(code: string, lang?: string, theme?: string): string {
   if (!highlighterInstance) {
     return escapeHtmlFallback(code);
   }
@@ -52,8 +52,9 @@ export function highlightCode(code: string, lang?: string): string {
   if (language === 'text') {
     return escapeHtmlFallback(code);
   }
+  const resolvedTheme = (theme === 'light-plus' ? 'light-plus' : 'dark-plus') as BundledTheme;
   try {
-    return highlighterInstance.codeToHtml(code, { lang: language as BundledLanguage, theme: THEME });
+    return highlighterInstance.codeToHtml(code, { lang: language as BundledLanguage, theme: resolvedTheme });
   } catch {
     return escapeHtmlFallback(code);
   }

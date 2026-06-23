@@ -1,8 +1,5 @@
 # U++ Topic++ Search & Preview for VS Code
 
-<!-- Hero screenshot -->
-![Hero screenshot](docs/images/hero.png)
-
 **U++ Topic++ Preview** brings first-class search, browsing, and preview support for Ultimate++ Topic++ (`.tpp`) documentation in Visual Studio Code.
 
 Browse and render Topic++ files with live HTML preview, syntax-highlighted code blocks, topic navigation, and full-text search — all without leaving VS Code.
@@ -32,8 +29,6 @@ Browse and render Topic++ files with live HTML preview, syntax-highlighted code 
 2. Click a `.tpp` file to open the live preview
 3. Use the **Topic++** activity bar to browse topics
 4. Run **TPP: Open Preview** from the Command Palette for manual control
-
-![Topic tree screenshot](docs/images/tree.png)
 
 ---
 
