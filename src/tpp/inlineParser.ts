@@ -52,11 +52,12 @@ export function processInlineContent(text: string): string {
         if (linkMatch) {
           const rawUrl = linkMatch[1];
           const url = processUrlEscapes(rawUrl).replace(/\|/g, '/');
-          const linkText = linkMatch[2] ? processEscapes(linkMatch[2].trim()) : url;
+          const rawLinkText = linkMatch[2] ? linkMatch[2].trim() : '';
+          const linkTextHtml = rawLinkText ? processInlineContent(rawLinkText) : escapeHtml(url);
           if (url.startsWith('topic://')) {
-            result += `<a data-href="${escapeHtml(url)}" class="topic-link">${escapeHtml(linkText)}</a>`;
+            result += `<a data-href="${escapeHtml(url)}" class="topic-link">${linkTextHtml}</a>`;
           } else {
-            result += `<a href="${escapeHtml(url)}" target="_blank">${escapeHtml(linkText)}</a>`;
+            result += `<a href="${escapeHtml(url)}" target="_blank">${linkTextHtml}</a>`;
           }
           continue;
         }
@@ -202,8 +203,32 @@ export function processInlineContent(text: string): string {
         result += `<div style="display:inline-block;border:1px dashed var(--tpp-border-color,#555);padding:4px 8px;color:var(--tpp-text-color,#999);font-size:12px;">[Image: ${w}x${h}]</div>`;
       }
     } else if (ch === '@') {
-      // Standalone @ in text — QTF uses @ as color prefix in format codes,
-      // but in content text it's just a literal '@'. Emit as-is.
+      // @ in content: check for @(R.G.B) or @hex color command
+      if (i + 1 < text.length && text[i + 1] === '(') {
+        let j = i + 2;
+        while (j < text.length && text[j] !== ')') j++;
+        if (j < text.length && j > i + 2) {
+          const rgbContent = text.substring(i + 2, j);
+          const parts = rgbContent.split('.');
+          if (parts.length === 3 && parts.every(p => /^\d+$/.test(p))) {
+            const color = `rgb(${parts[0]},${parts[1]},${parts[2]})`;
+            i = j + 1;
+            // Read next text chunk to apply color to
+            let textChunk = '';
+            while (i < text.length && text[i] !== '[' && text[i] !== '&' && text[i] !== '{' && text[i] !== ']' && text[i] !== '@') {
+              if (text[i] === '`' && i + 1 < text.length) {
+                textChunk += text[i] + text[i + 1];
+                i += 2;
+              } else {
+                textChunk += text[i];
+                i++;
+              }
+            }
+            result += `<span style="color:${color}">${escapeHtml(processEscapes(textChunk))}</span>`;
+            continue;
+          }
+        }
+      }
       result += '@';
       i++;
     } else {
