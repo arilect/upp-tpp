@@ -6,6 +6,22 @@ import { processInlineContent } from './inlineParser';
 import { looksLikeCodeContent } from './codeDetector';
 import { slugify } from './escape';
 import { currentCodeRenderingMode, currentShikiTheme, currentTableBackgroundColor, resetStyleRegistry, getStyleRegistry, registerStyle } from './constants';
+import * as zlib from 'zlib';
+
+const COMPRESSED_TITLE_RE = /^TITLE\("([^"]*)"\)\s*\r?\n/m;
+const COMPRESSED_MARKER_RE = /^COMPRESSED\r?\n/m;
+
+export function decompressTpp(content: string): string {
+  const titleMatch = content.match(COMPRESSED_TITLE_RE);
+  if (!titleMatch) return content;
+  const compIdx = content.search(COMPRESSED_MARKER_RE);
+  if (compIdx < 0) return content;
+  const afterComp = content.substring(compIdx + content.substring(compIdx).match(COMPRESSED_MARKER_RE)![0].length);
+  const bytes = afterComp.split(',').filter(s => s.trim() !== '').map(Number);
+  const buf = Buffer.from(bytes);
+  const decompressed = zlib.inflateSync(buf);
+  return `topic "${titleMatch[1]}";\n${decompressed.toString('utf8')}`;
+}
 
 function stripQtfFormatting(content: string): string {
   let result = '';

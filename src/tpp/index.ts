@@ -1,13 +1,14 @@
 export type { TextStyle, ParagraphStyle, ParsedTpp, TppRenderOptions } from './types';
 import type { TppRenderOptions } from './types';
 import { SIZE_MAP_DEFAULTS, setCurrentOptions } from './constants';
-import { extractTopicTitle, extractTopicBody, parseQtfContent } from './qtfParser';
+import { extractTopicTitle, extractTopicBody, parseQtfContent, decompressTpp } from './qtfParser';
 import { buildHtmlDocument } from './htmlTemplate';
 import { escapeHtml } from './escape';
 
 export function parseTpp(content: string): { title: string | null; bodyHtml: string } {
-  const title = extractTopicTitle(content);
-  const body = extractTopicBody(content);
+  const decompressed = decompressTpp(content);
+  const title = extractTopicTitle(decompressed);
+  const body = extractTopicBody(decompressed);
   const bodyHtml = parseQtfContent(body);
 
   return {

@@ -2,6 +2,7 @@ import * as vscode from 'vscode';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as os from 'os';
+import { decompressTpp } from './tpp/qtfParser';
 
 // ── Assembly / .var / .upp types ─────────────────────────────────────
 
@@ -564,7 +565,8 @@ function findAppTppFiles(uppsrcDirs: string[]): string[] {
  */
 function readTopicEntry(filePath: string, uppsrcDir: string): TopicEntry | null {
   try {
-    const content = fs.readFileSync(filePath, 'utf-8');
+    const raw = fs.readFileSync(filePath, 'utf-8');
+    const content = decompressTpp(raw);
     const parsed = parseTppPath(filePath);
     if (!parsed) return null;
 
