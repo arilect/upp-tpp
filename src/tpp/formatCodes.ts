@@ -43,9 +43,9 @@ export function parseFormatCodes(codes: string): TextStyle {
           style.monospace = false;
           i += 2;
         } else {
-          // Other language code — skip alphanumeric code chars
+          // Other language code — skip alphanumeric + hyphen code chars
           i++;
-          while (i < codes.length && /[a-zA-Z0-9_]/.test(codes[i])) {
+          while (i < codes.length && /[a-zA-Z0-9_-]/.test(codes[i])) {
             i++;
           }
         }
