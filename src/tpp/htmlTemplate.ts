@@ -134,6 +134,12 @@ ${generateWebviewJs(isPublish)}
     <h3 style="margin-top:16px">Background Colors (QTF)</h3>
     <div class="settings-row">
       <div class="settings-group">
+        <label>Table Background</label>
+        <input type="color" id="set-tableBackgroundColor" value="${options?.tableBackgroundColor || '#712a00'}">
+      </div>
+    </div>
+    <div class="settings-row">
+      <div class="settings-group">
         <label>Yellow</label>
         <input type="color" id="set-bgYellow" value="${options?.bgYellow || '#cccc44'}">
       </div>

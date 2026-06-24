@@ -63,6 +63,7 @@ export interface TppRenderOptions {
   bgMagenta?: string;
   bgCyan?: string;
   bgCustom?: string;
+  tableBackgroundColor?: string;
   codeFontSize?: number;
   codeMarginLeft?: number;
   listMarginLeft?: number;

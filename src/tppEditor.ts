@@ -140,6 +140,7 @@ export class TppEditorProvider implements vscode.CustomTextEditorProvider {
         await config.update('typeColor', s.typeColor, vscode.ConfigurationTarget.Global);
         await config.update('operatorColor', s.operatorColor, vscode.ConfigurationTarget.Global);
         await config.update('commentColor', s.commentColor, vscode.ConfigurationTarget.Global);
+        await config.update('tableBackgroundColor', s.tableBackgroundColor, vscode.ConfigurationTarget.Global);
         await config.update('codeFontSize', s.codeFontSize, vscode.ConfigurationTarget.Global);
         await config.update('codeMarginLeft', s.codeMarginLeft, vscode.ConfigurationTarget.Global);
         await config.update('listMarginLeft', s.listMarginLeft, vscode.ConfigurationTarget.Global);
@@ -274,6 +275,7 @@ export class TppEditorProvider implements vscode.CustomTextEditorProvider {
       bgMagenta: config.get<string>('bgMagenta', '#ff66ff'),
       bgCyan: config.get<string>('bgCyan', '#66ffff'),
       bgCustom: config.get<string>('bgCustom', '#555555'),
+      tableBackgroundColor: config.get<string>('tableBackgroundColor', '#712a00'),
       codeFontSize: config.get<number>('codeFontSize', 13),
       codeMarginLeft: config.get<number>('codeMarginLeft', 64),
       listMarginLeft: config.get<number>('listMarginLeft', 45),

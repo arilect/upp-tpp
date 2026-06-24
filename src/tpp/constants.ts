@@ -38,6 +38,7 @@ export let currentCodeMarginLeft = 64;
 export let currentListMarginLeft = 45;
 export let currentKeywordColor = '#569cd6';
 export let currentParamColor = '#ff0000';
+export let currentTableBackgroundColor = '#712a00';
 
 export const COLOR_MAP: Record<string, string> = {
   '0': '#888888',
@@ -75,6 +76,7 @@ export function setCurrentOptions(opts: {
   listMarginLeft?: number;
   keywordColor?: string;
   paramColor?: string;
+  tableBackgroundColor?: string;
   codeRenderingMode?: 'u++' | 'vscode';
   shikiTheme?: string;
 }) {
@@ -97,6 +99,7 @@ export function setCurrentOptions(opts: {
   if (opts.listMarginLeft) currentListMarginLeft = opts.listMarginLeft;
   if (opts.keywordColor) currentKeywordColor = opts.keywordColor;
   if (opts.paramColor) currentParamColor = opts.paramColor;
+  if (opts.tableBackgroundColor) currentTableBackgroundColor = opts.tableBackgroundColor;
   if (opts.codeRenderingMode) currentCodeRenderingMode = opts.codeRenderingMode;
   if (opts.shikiTheme) currentShikiTheme = opts.shikiTheme;
 }

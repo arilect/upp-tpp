@@ -193,6 +193,7 @@ export async function activate(context: vscode.ExtensionContext) {
         bgMagenta: config.get<string>('bgMagenta', '#ff66ff'),
         bgCyan: config.get<string>('bgCyan', '#66ffff'),
         bgCustom: config.get<string>('bgCustom', '#555555'),
+        tableBackgroundColor: config.get<string>('tableBackgroundColor', '#712a00'),
         codeFontSize: config.get<number>('codeFontSize', 13),
         codeMarginLeft: config.get<number>('codeMarginLeft', 64),
         listMarginLeft: config.get<number>('listMarginLeft', 45),
@@ -251,6 +252,7 @@ export async function activate(context: vscode.ExtensionContext) {
               bgMagenta: cfg.get<string>('bgMagenta', '#ff66ff'),
               bgCyan: cfg.get<string>('bgCyan', '#66ffff'),
               bgCustom: cfg.get<string>('bgCustom', '#555555'),
+              tableBackgroundColor: cfg.get<string>('tableBackgroundColor', '#712a00'),
               codeFontSize: cfg.get<number>('codeFontSize', 13),
               codeMarginLeft: cfg.get<number>('codeMarginLeft', 64),
               listMarginLeft: cfg.get<number>('listMarginLeft', 45),
@@ -356,6 +358,7 @@ export async function activate(context: vscode.ExtensionContext) {
           await cfg.update('bgMagenta', s.bgMagenta, vscode.ConfigurationTarget.Global);
           await cfg.update('bgCyan', s.bgCyan, vscode.ConfigurationTarget.Global);
           await cfg.update('bgCustom', s.bgCustom, vscode.ConfigurationTarget.Global);
+          await cfg.update('tableBackgroundColor', s.tableBackgroundColor, vscode.ConfigurationTarget.Global);
           await cfg.update('codeFontSize', s.codeFontSize, vscode.ConfigurationTarget.Global);
           await cfg.update('codeMarginLeft', s.codeMarginLeft, vscode.ConfigurationTarget.Global);
           await cfg.update('listMarginLeft', s.listMarginLeft, vscode.ConfigurationTarget.Global);
@@ -400,6 +403,7 @@ export async function activate(context: vscode.ExtensionContext) {
             bgMagenta: cfg.get<string>('bgMagenta', '#ff66ff'),
             bgCyan: cfg.get<string>('bgCyan', '#66ffff'),
             bgCustom: cfg.get<string>('bgCustom', '#555555'),
+            tableBackgroundColor: cfg.get<string>('tableBackgroundColor', '#712a00'),
             codeFontSize: cfg.get<number>('codeFontSize', 13),
             codeMarginLeft: cfg.get<number>('codeMarginLeft', 64),
             listMarginLeft: cfg.get<number>('listMarginLeft', 45),

@@ -5,7 +5,7 @@ import { parseParagraphStyle, paragraphStyleToCss, isStyleDefinition } from './p
 import { processInlineContent } from './inlineParser';
 import { looksLikeCodeContent } from './codeDetector';
 import { slugify } from './escape';
-import { currentCodeRenderingMode, currentShikiTheme, resetStyleRegistry, getStyleRegistry, registerStyle } from './constants';
+import { currentCodeRenderingMode, currentShikiTheme, currentTableBackgroundColor, resetStyleRegistry, getStyleRegistry, registerStyle } from './constants';
 
 function stripQtfFormatting(content: string): string {
   let result = '';
@@ -287,7 +287,7 @@ export function parseQtfContent(content: string): string {
             cells.push(rawContent.substring(cellStart));
 
             const numCols = header.includes(':') ? header.split(':').length : 2;
-            const effectiveBg = bgColor || 'rgb(255,255,150)';
+            const effectiveBg = bgColor || currentTableBackgroundColor || '#712a00';
             html += `<table class="tpp-table tpp-table-colored" style="--tpp-table-bg:${effectiveBg}"><tbody>\n`;
             for (let ci = 0; ci < cells.length; ci += numCols) {
               html += '<tr>\n';

@@ -47,6 +47,7 @@ export function tppToHtml(content: string, title?: string, options?: TppRenderOp
       paramColor: options.paramColor,
       codeRenderingMode: options.codeRenderingMode,
       shikiTheme: options.shikiTheme,
+      tableBackgroundColor: options.tableBackgroundColor,
     });
   }
   const parsed = parseTpp(content);

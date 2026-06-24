@@ -80,6 +80,7 @@ export function generateWebviewJs(isPublish: boolean): string {
         bgMagenta: document.getElementById('set-bgMagenta').value,
         bgCyan: document.getElementById('set-bgCyan').value,
         bgCustom: document.getElementById('set-bgCustom').value,
+        tableBackgroundColor: document.getElementById('set-tableBackgroundColor').value,
         serifFontFamily: document.getElementById('set-serifFontFamily').value || 'serif',
         codeFontSize: parseInt(document.getElementById('set-codeFontSize').value) || 13,
         codeMarginLeft: parseInt(document.getElementById('set-codeMarginLeft').value) || 64,
@@ -117,6 +118,7 @@ export function generateWebviewJs(isPublish: boolean): string {
       r.style.setProperty('--tpp-bg-magenta', s.bgMagenta);
       r.style.setProperty('--tpp-bg-cyan', s.bgCyan);
       r.style.setProperty('--tpp-bg-custom', s.bgCustom);
+      r.style.setProperty('--tpp-table-bg', s.tableBackgroundColor);
       r.style.setProperty('--tpp-serif-font', s.serifFontFamily);
       r.style.setProperty('--tpp-code-font-size', s.codeFontSize + 'px');
       r.style.setProperty('--tpp-code-margin-left', s.codeMarginLeft + 'px');
@@ -254,6 +256,7 @@ export function generateWebviewJs(isPublish: boolean): string {
         document.getElementById('set-bgMagenta').value = '#ff66ff';
         document.getElementById('set-bgCyan').value = '#66ffff';
         document.getElementById('set-bgCustom').value = '#555555';
+        document.getElementById('set-tableBackgroundColor').value = '#712a00';
         document.getElementById('set-serifFontFamily').value = 'serif';
         document.getElementById('set-codeFontSize').value = 13;
         document.getElementById('set-codeMarginLeft').value = 64;

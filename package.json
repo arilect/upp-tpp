@@ -180,6 +180,11 @@
           "default": "#3c3c3c",
           "description": "Table border and separator color"
         },
+        "tpp.tableBackgroundColor": {
+          "type": "string",
+          "default": "#712a00",
+          "description": "Default table background color (used when QTF table has no explicit @(R.G.B) color)"
+        },
         "tpp.keywordColor": {
           "type": "string",
           "default": "#569cd6",

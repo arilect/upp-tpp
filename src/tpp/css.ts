@@ -29,6 +29,7 @@ export function generateCss(options: TppRenderOptions | undefined, isPublish: bo
       --tpp-bg-magenta: ${options?.bgMagenta || '#ff66ff'};
       --tpp-bg-cyan: ${options?.bgCyan || '#66ffff'};
       --tpp-bg-custom: ${options?.bgCustom || '#555555'};
+      --tpp-table-bg: ${options?.tableBackgroundColor || '#712a00'};
       --tpp-code-font-size: ${options?.codeFontSize || 13}px;
       --tpp-code-margin-left: ${options?.codeMarginLeft || 64}px;
       --tpp-list-margin-left: ${options?.listMarginLeft || 45}px;
