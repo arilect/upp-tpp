@@ -60,3 +60,11 @@ node_modules/**
 !node_modules/regex-utilities/package.json
 !node_modules/regex-utilities/**/*.mjs
 !node_modules/regex-utilities/**/*.js
+
+# ── WASM clang-format (code beautifier) ──
+!node_modules/@wasm-fmt/clang-format/package.json
+!node_modules/@wasm-fmt/clang-format/clang-format.d.ts
+!node_modules/@wasm-fmt/clang-format/clang-format.js
+!node_modules/@wasm-fmt/clang-format/clang-format.wasm
+!node_modules/@wasm-fmt/clang-format/clang-format-binding.js
+!node_modules/@wasm-fmt/clang-format/clang-format-node.js

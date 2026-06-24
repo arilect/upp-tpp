@@ -83,4 +83,6 @@ export interface TppRenderOptions {
   size9?: number;
   uppsrcScanMode?: string;
   uppsrcCustomPath?: string;
+  formatCode?: boolean;
+  formatStyle?: string;
 }

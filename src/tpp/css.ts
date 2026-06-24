@@ -119,8 +119,14 @@ export function generateCss(options: TppRenderOptions | undefined, isPublish: bo
     .tpp-table-colored td { border-bottom-color: rgba(0,0,0,0.15); }
     .tpp-table-cell-key { padding: 8px 12px; font-family:var(--tpp-code-font); font-size:var(--tpp-code-font-size); font-weight: bold; white-space: nowrap; background: var(--tpp-table-bg); color: var(--tpp-text-color); }
     .tpp-table-cell-desc { padding: 8px 12px; background: var(--tpp-table-bg); color: var(--tpp-text-color); }
-    .shiki-wrapper { margin: 0.5em 0; border-radius: 6px; overflow: hidden; }
+    .shiki-wrapper { margin: 0.5em 0; border-radius: 6px; overflow: hidden; position: relative; }
     .shiki-wrapper pre.shiki { background-color: var(--tpp-code-bg) !important; margin: 0; padding: 0 12px 12px 0; border-radius: 6px; overflow-wrap: break-word; word-wrap: break-word; white-space: pre-wrap; }
+    .code-block-wrap { position: relative; margin: 0.5em 0; }
+    .code-block-wrap pre.shiki { background-color: var(--tpp-code-bg) !important; margin: 0; padding: 8px 12px; border-radius: 6px; overflow-wrap: break-word; word-wrap: break-word; white-space: pre-wrap; }
+    .code-copy-btn { position: absolute; top: 4px; right: 4px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 4px; color: #999; cursor: pointer; padding: 3px 8px; font-size: 12px; font-family: var(--tpp-code-font); opacity: 0; transition: opacity 0.15s; z-index: 10; }
+    .code-block-wrap:hover .code-copy-btn { opacity: 1; }
+    .code-copy-btn:hover { background: rgba(255,255,255,0.18); color: #fff; }
+    .code-copy-btn.copied { color: #4ec9b0; }
     a.l1 { text-decoration:none; font-size: 8pt; font-family: sans-serif; font-weight: normal; }
     a.l1:link { color:var(--tpp-link-color); }
     a.l1:visited { color:#bb88cc; }

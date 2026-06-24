@@ -43,6 +43,18 @@ export function generateWebviewJs(isPublish: boolean): string {
         e.stopPropagation();
         window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' });
       });
+
+      // Code block copy buttons
+      document.querySelectorAll('.code-copy-btn').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          var code = btn.getAttribute('data-code') || '';
+          navigator.clipboard.writeText(code);
+          btn.textContent = 'copied!';
+          btn.classList.add('copied');
+          setTimeout(function() { btn.textContent = 'copy'; btn.classList.remove('copied'); }, 1500);
+        });
+      });
     });
 
     function showAlert(msg) {
@@ -98,6 +110,8 @@ export function generateWebviewJs(isPublish: boolean): string {
         codeRenderingMode: document.getElementById('set-codeRenderingMode').value || 'vscode',
         uppsrcScanMode: document.getElementById('set-uppsrcScanMode').value || 'varfiles',
         uppsrcCustomPath: document.getElementById('set-uppsrcCustomPath').value || '',
+        formatCode: document.getElementById('set-formatCode').checked,
+        formatStyle: document.getElementById('set-formatStyle').value || 'U++',
       };
     }
 
@@ -275,6 +289,8 @@ export function generateWebviewJs(isPublish: boolean): string {
         document.getElementById('set-uppsrcScanMode').value = 'varfiles';
         document.getElementById('set-uppsrcCustomPath').value = '';
         document.getElementById('set-uppsrcCustomPath-row').style.display = 'none';
+        document.getElementById('set-formatCode').checked = true;
+        document.getElementById('set-formatStyle').value = 'U++';
         saveSettings();
       });
     });
@@ -484,6 +500,22 @@ export function generateWebviewJs(isPublish: boolean): string {
       }
     }));
 
+    // Copy Code Block (only visible when on a code block)
+    var copyCodeItem = makeCtxItem('Copy Code', function() {
+      if (ctxClickedElement) {
+        var wrap = ctxClickedElement.closest('.code-block-wrap');
+        if (wrap) {
+          var btn = wrap.querySelector('.code-copy-btn');
+          if (btn) {
+            var code = btn.getAttribute('data-code') || '';
+            navigator.clipboard.writeText(code);
+          }
+        }
+      }
+    });
+    copyCodeItem.id = 'ctx-copy-code';
+    ctxMenu.appendChild(copyCodeItem);
+
     // Copy Link (only visible when on a link)
     var copyLinkItem = makeCtxItem('Copy Link', function() {
       if (ctxClickedElement) {
@@ -537,6 +569,10 @@ export function generateWebviewJs(isPublish: boolean): string {
       // Show/hide Copy Link based on whether we're on a link
       var onLink = e.target.closest('a');
       copyLinkItem.style.display = onLink ? '' : 'none';
+
+      // Show/hide Copy Code based on whether we're on a code block
+      var onCode = e.target.closest('.code-block-wrap');
+      copyCodeItem.style.display = onCode ? '' : 'none';
 
       ctxMenu.style.display = 'block';
       // Keep menu within viewport

@@ -157,6 +157,8 @@ export class TppEditorProvider implements vscode.CustomTextEditorProvider {
         await config.update('codeRenderingMode', s.codeRenderingMode, vscode.ConfigurationTarget.Global);
         await config.update('uppsrcScanMode', s.uppsrcScanMode, vscode.ConfigurationTarget.Global);
         await config.update('uppsrcCustomPath', s.uppsrcCustomPath, vscode.ConfigurationTarget.Global);
+        await config.update('formatCode', s.formatCode, vscode.ConfigurationTarget.Global);
+        await config.update('formatStyle', s.formatStyle, vscode.ConfigurationTarget.Global);
         const content = preprocessTppImages(document.uri.fsPath) || document.getText();
         webviewPanel.webview.html = this.getHtmlForWebview(
           webviewPanel.webview,
@@ -293,6 +295,8 @@ export class TppEditorProvider implements vscode.CustomTextEditorProvider {
       codeRenderingMode: config.get<'u++' | 'vscode'>('codeRenderingMode', 'vscode'),
       uppsrcScanMode: config.get<string>('uppsrcScanMode', 'varfiles'),
       uppsrcCustomPath: config.get<string>('uppsrcCustomPath', ''),
+      formatCode: config.get<boolean>('formatCode', true),
+      formatStyle: config.get<string>('formatStyle', 'U++'),
       scrollToAnchor,
     };
     return tppToHtml(content, undefined, options);

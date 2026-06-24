@@ -17,7 +17,7 @@ export function looksLikeCodeContent(text: string): boolean {
     /^#\s*(include|define|if|else|elif|endif|pragma|undef|ifdef|ifndef)\b/.test(plain) ||
     /^(struct|class|enum|union|namespace|using|template|virtual|explicit|friend)\s/.test(plain) ||
     /^(void|int|bool|char|long|float|double|dword|byte|String|Value|Vector|Array)\s+\w+\s*[({]/.test(plain) ||
-    /^(if|else|for|while|do|switch|case|return|break|continue|throw|try|catch)\s*[\({]/.test(plain) ||
+    /^(if|else|for|while|do|switch|case|return|break|continue|throw|try|catch)\s*[\({;]/.test(plain) ||
     /^(public|private|protected)\s*[:{]/.test(plain) ||
     /^[a-zA-Z_]\w*::[a-zA-Z_~]\w*\s*\(/.test(plain) ||
     /^(GUI_APP_MAIN|CONSOLE_APP_MAIN|APP_MAIN)\b/.test(plain) ||

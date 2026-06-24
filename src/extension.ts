@@ -3,6 +3,7 @@ import * as path from 'path';
 import * as fs from 'fs';
 import { TppEditorProvider, TppHtmlContentProvider } from './tppEditor';
 import { initHighlighter } from './highlighter';
+import { initFormatter } from './formatter';
 import { TopicIndex } from './topicIndex';
 import { TopicTreeProvider } from './topicTreeProvider';
 import { TopicSearchViewProvider } from './topicSearchView';
@@ -20,6 +21,14 @@ export async function activate(context: vscode.ExtensionContext) {
     console.log('Shiki highlighter initialized');
   } catch (err) {
     console.warn('Failed to initialize Shiki highlighter:', err);
+  }
+
+  // Initialize WASM clang-format at startup
+  try {
+    await initFormatter();
+    console.log('clang-format initialized');
+  } catch (err) {
+    console.warn('Failed to initialize clang-format:', err);
   }
 
   // Build topic index for tree view and search
@@ -210,6 +219,8 @@ export async function activate(context: vscode.ExtensionContext) {
         size9: config.get<number>('size9', 144),
         codeRenderingMode: config.get<'u++' | 'vscode'>('codeRenderingMode', 'vscode'),
         shikiTheme: config.get<string>('shikiTheme', 'dark-plus'),
+        formatCode: config.get<boolean>('formatCode', true),
+        formatStyle: config.get<string>('formatStyle', 'U++'),
       };
       panel.webview.html = tppToHtml(document.getText(), undefined, options);
 
@@ -270,6 +281,8 @@ export async function activate(context: vscode.ExtensionContext) {
               shikiTheme: cfg.get<string>('shikiTheme', 'dark-plus'),
               uppsrcScanMode: cfg.get<string>('uppsrcScanMode', 'varfiles'),
               uppsrcCustomPath: cfg.get<string>('uppsrcCustomPath', ''),
+              formatCode: cfg.get<boolean>('formatCode', true),
+              formatStyle: cfg.get<string>('formatStyle', 'U++'),
             };
             const rawText = preprocessTppImages(document.uri.fsPath) || document.getText();
             const html = tppToHtml(rawText, undefined, opts);
@@ -374,6 +387,8 @@ export async function activate(context: vscode.ExtensionContext) {
           await cfg.update('size9', s.size9, vscode.ConfigurationTarget.Global);
           await cfg.update('codeRenderingMode', s.codeRenderingMode, vscode.ConfigurationTarget.Global);
           await cfg.update('shikiTheme', s.shikiTheme, vscode.ConfigurationTarget.Global);
+          await cfg.update('formatCode', s.formatCode, vscode.ConfigurationTarget.Global);
+          await cfg.update('formatStyle', s.formatStyle, vscode.ConfigurationTarget.Global);
           await cfg.update('uppsrcScanMode', s.uppsrcScanMode, vscode.ConfigurationTarget.Global);
           await cfg.update('uppsrcCustomPath', s.uppsrcCustomPath, vscode.ConfigurationTarget.Global);
           const opts = {
@@ -421,6 +436,8 @@ export async function activate(context: vscode.ExtensionContext) {
             shikiTheme: cfg.get<string>('shikiTheme', 'dark-plus'),
             uppsrcScanMode: cfg.get<string>('uppsrcScanMode', 'varfiles'),
             uppsrcCustomPath: cfg.get<string>('uppsrcCustomPath', ''),
+            formatCode: cfg.get<boolean>('formatCode', true),
+            formatStyle: cfg.get<string>('formatStyle', 'U++'),
           };
           panel.webview.html = tppToHtml(document.getText(), undefined, opts);
           // If scan mode changed, rebuild index and refresh tree

@@ -159,6 +159,10 @@ export function processInlineContent(text: string): string {
           }
         }
       }
+    } else if (ch === '{') {
+      // Lone { (not part of {{ table) — treat as literal text
+      result += '{';
+      i++;
     } else if (ch === ']') {
       // Stray closing bracket from document structure — skip it
       i++;

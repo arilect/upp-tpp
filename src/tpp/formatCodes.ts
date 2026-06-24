@@ -1,5 +1,5 @@
 import type { TextStyle } from './types';
-import { COLOR_MAP, FONT_MAP, SIZE_MAP, currentKeywordColor, currentStringColor, currentTypeColor, currentOperatorColor, currentPreprocessorColor, currentCommentColor } from './constants';
+import { COLOR_MAP, FONT_MAP, SIZE_MAP, UPP_THEME_COLORS } from './constants';
 import { rgbToHex } from './escape';
 
 export function parseColor(code: string): string | undefined {
@@ -202,12 +202,12 @@ export function styleToClass(style: TextStyle): string | null {
 
   const lc = c ? rgbToHex(c) : '';
   const lcbg = bg ? rgbToHex(bg) : '';
-  const kw = lc === currentKeywordColor.toLowerCase();
-  const str = lc === currentStringColor.toLowerCase();
-  const tp = lc === currentTypeColor.toLowerCase();
-  const op = lc === currentOperatorColor.toLowerCase();
-  const pp = lc === currentPreprocessorColor.toLowerCase();
-  const cm = lc === currentCommentColor.toLowerCase();
+  const kw = lc === UPP_THEME_COLORS.keyword;
+  const str = lc === UPP_THEME_COLORS.string;
+  const tp = lc === UPP_THEME_COLORS.type;
+  const op = lc === UPP_THEME_COLORS.operator;
+  const pp = lc === UPP_THEME_COLORS.preprocessor;
+  const cm = lc === UPP_THEME_COLORS.comment;
 
   // Monospace + background (with or without fg)
   if (m && lcbg && lcbg !== '#888888' && lcbg !== '#000000') {

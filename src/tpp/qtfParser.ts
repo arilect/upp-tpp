@@ -5,7 +5,8 @@ import { parseParagraphStyle, paragraphStyleToCss, isStyleDefinition } from './p
 import { processInlineContent } from './inlineParser';
 import { looksLikeCodeContent } from './codeDetector';
 import { slugify } from './escape';
-import { currentCodeRenderingMode, currentShikiTheme, currentTableBackgroundColor, resetStyleRegistry, getStyleRegistry, registerStyle } from './constants';
+import { currentCodeRenderingMode, currentShikiTheme, currentTableBackgroundColor, currentFormatCode, currentFormatStyle, resetStyleRegistry, getStyleRegistry, registerStyle } from './constants';
+import { formatCodeSync, getFormatter } from '../formatter';
 import * as zlib from 'zlib';
 
 const COMPRESSED_TITLE_RE = /^TITLE\("([^"]*)"\)\s*\r?\n/m;
@@ -142,9 +143,12 @@ export function parseQtfContent(content: string): string {
   function flushCodeBuffer() {
     if (codeBuffer.length === 0) return;
     if (currentCodeRenderingMode === 'vscode' && getHighlighter()) {
-      const merged = codeBuffer.join('\n');
+      let merged = codeBuffer.join('\n');
+      if (currentFormatCode && getFormatter()) {
+        merged = formatCodeSync(merged, currentFormatStyle);
+      }
       const highlighted = highlightCode(merged, undefined, currentShikiTheme);
-      html += `<div class="shiki-wrapper" style="font-family:var(--tpp-code-font);font-size:var(--tpp-code-font-size);white-space:pre-wrap;word-wrap:break-word;">${highlighted}</div>\n`;
+      html += `<div class="code-block-wrap"><div class="shiki-wrapper" style="font-family:var(--tpp-code-font);font-size:var(--tpp-code-font-size);white-space:pre-wrap;word-wrap:break-word;">${highlighted}</div><button class="code-copy-btn" data-code="${escapeHtml(merged).replace(/"/g, '&quot;')}">copy</button></div>\n`;
     } else {
       for (const line of codeBuffer) {
         html += `<p class="M">${line}</p>\n`;
@@ -362,7 +366,7 @@ export function parseQtfContent(content: string): string {
       // NOTE: /s[37]/ was wrong because s3 is a heading style in some documents, not code
       const plainText = isCodeBlock ? '' : stripQtfFormatting(contentPart).trim();
       const hasCourierStyle = /s7[;\s]|s7$/.test(formatPart) || /;C[+0-9]/.test(formatPart) || /;C%/.test(formatPart);
-      const looksLikeCode = !isCodeBlock && hasCourierStyle && plainText.length > 0 && looksLikeCodeContent(plainText);
+      const looksLikeCode = !isCodeBlock && hasCourierStyle && plainText.length > 0;
 
       // Determine U++ CSS class from EFFECTIVE style (after inheritance)
       // Only assign heading classes when paragraph has EXPLICIT heading formatting

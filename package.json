@@ -303,7 +303,10 @@
         "tpp.codeRenderingMode": {
           "type": "string",
           "default": "vscode",
-          "enum": ["u++", "vscode"],
+          "enum": [
+            "u++",
+            "vscode"
+          ],
           "enumDescriptions": [
             "QTF pre-tokenized colors (U++ style)",
             "VS Code TextMate grammar highlighting (Shiki)"
@@ -313,17 +316,54 @@
         "tpp.shikiTheme": {
           "type": "string",
           "default": "dark-plus",
-          "enum": ["dark-plus", "light-plus"],
+          "enum": [
+            "dark-plus",
+            "light-plus"
+          ],
           "enumDescriptions": [
             "Dark theme (default)",
             "Light/white theme"
           ],
           "description": "Shiki syntax highlighting theme for code blocks (when codeRenderingMode is 'vscode')"
         },
+        "tpp.formatCode": {
+          "type": "boolean",
+          "default": true,
+          "description": "Auto-format C++ code blocks with clang-format (when codeRenderingMode is 'vscode')"
+        },
+        "tpp.formatStyle": {
+          "type": "string",
+          "default": "U++",
+          "enum": [
+            "U++",
+            "LLVM",
+            "Google",
+            "Chromium",
+            "Mozilla",
+            "WebKit",
+            "Microsoft",
+            "GNU"
+          ],
+          "enumDescriptions": [
+            "U++ framework style (custom LLVM-based)",
+            "LLVM coding standards",
+            "Google C++ style guide",
+            "Chromium style guide",
+            "Mozilla style guide",
+            "WebKit style guide",
+            "Microsoft style guide",
+            "GNU coding standards"
+          ],
+          "description": "clang-format style for code beautification"
+        },
         "tpp.uppsrcScanMode": {
           "type": "string",
           "default": "varfiles",
-          "enum": ["varfiles", "home", "custom"],
+          "enum": [
+            "varfiles",
+            "home",
+            "custom"
+          ],
           "enumDescriptions": [
             "Scan UPP directories from *.var files in ~/.config/u++/theide/",
             "Scan all uppsrc directories under ~/ (recursive)",
@@ -350,6 +390,7 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
+    "@wasm-fmt/clang-format": "^22.1.8",
     "shiki": "^4.2.0"
   }
 }

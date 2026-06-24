@@ -23,6 +23,8 @@ export const SIZE_MAP_DEFAULTS: Record<string, string> = {
 
 export let currentCodeRenderingMode: 'u++' | 'vscode' = 'vscode';
 export let currentShikiTheme = 'dark-plus';
+export let currentFormatCode = true;
+export let currentFormatStyle = 'U++';
 export let styleRegistry: Record<string, ParagraphStyle> = {};
 
 export let SIZE_MAP: Record<string, string> = { ...SIZE_MAP_DEFAULTS };
@@ -33,6 +35,18 @@ export let currentStringColor = '#800000';
 export let currentTypeColor = '#008080';
 export let currentOperatorColor = '#0000ff';
 export let currentCommentColor = '#008000';
+
+// Fixed U++ theme colors for class assignment in styleToClass().
+// These are the colors QTF source uses in @(R.G.B) codes.
+// Must NOT change when user adjusts color settings.
+export const UPP_THEME_COLORS = {
+  operator:  '#0000ff',
+  keyword:   '#569cd6',
+  string:    '#00a000',
+  type:      '#008080',
+  preprocessor: '#8000ff',
+  comment:   '#008000',
+} as const;
 export let currentCodeFontSize = 13;
 export let currentCodeMarginLeft = 64;
 export let currentListMarginLeft = 45;
@@ -79,6 +93,8 @@ export function setCurrentOptions(opts: {
   tableBackgroundColor?: string;
   codeRenderingMode?: 'u++' | 'vscode';
   shikiTheme?: string;
+  formatCode?: boolean;
+  formatStyle?: string;
 }) {
   if (opts.sizeMap) {
     for (const k of Object.keys(opts.sizeMap)) SIZE_MAP[k] = opts.sizeMap[k];
@@ -102,6 +118,8 @@ export function setCurrentOptions(opts: {
   if (opts.tableBackgroundColor) currentTableBackgroundColor = opts.tableBackgroundColor;
   if (opts.codeRenderingMode) currentCodeRenderingMode = opts.codeRenderingMode;
   if (opts.shikiTheme) currentShikiTheme = opts.shikiTheme;
+  if (opts.formatCode !== undefined) currentFormatCode = opts.formatCode;
+  if (opts.formatStyle) currentFormatStyle = opts.formatStyle;
 }
 
 export function resetStyleRegistry() {

@@ -48,6 +48,22 @@ ${generateWebviewJs(isPublish)}
           <option value="u++"${options?.codeRenderingMode === 'u++' ? ' selected' : ''}>U++ (QTF)</option>
         </select>
       </div>
+      <div class="settings-group">
+        <label>Format Code</label>
+        <select id="set-formatStyle">
+          <option value="U++"${(options?.formatStyle || 'U++') === 'U++' ? ' selected' : ''}>U++ style</option>
+          <option value="LLVM"${options?.formatStyle === 'LLVM' ? ' selected' : ''}>LLVM</option>
+          <option value="Google"${options?.formatStyle === 'Google' ? ' selected' : ''}>Google</option>
+          <option value="Chromium"${options?.formatStyle === 'Chromium' ? ' selected' : ''}>Chromium</option>
+          <option value="Mozilla"${options?.formatStyle === 'Mozilla' ? ' selected' : ''}>Mozilla</option>
+          <option value="WebKit"${options?.formatStyle === 'WebKit' ? ' selected' : ''}>WebKit</option>
+          <option value="Microsoft"${options?.formatStyle === 'Microsoft' ? ' selected' : ''}>Microsoft</option>
+          <option value="GNU"${options?.formatStyle === 'GNU' ? ' selected' : ''}>GNU</option>
+        </select>
+      </div>
+      <div class="settings-group" style="align-self:center">
+        <label><input type="checkbox" id="set-formatCode"${(options?.formatCode !== false) ? ' checked' : ''}> Beautify</label>
+      </div>
     </div>
     <div class="settings-group">
       <label>Font Family</label>
@@ -93,37 +109,37 @@ ${generateWebviewJs(isPublish)}
     </div>
     <div class="settings-row">
       <div class="settings-group">
-        <label>Keyword Color</label>
+        <label>Keyword Color <small style="color:#888">.AH .N</small></label>
         <input type="color" id="set-keywordColor" value="${options?.keywordColor || '#569cd6'}">
       </div>
       <div class="settings-group">
-        <label>Param Color</label>
+        <label>Param Color <small style="color:#888">.AO</small></label>
         <input type="color" id="set-paramColor" value="${options?.paramColor || '#ff0000'}">
       </div>
     </div>
     <div class="settings-row">
       <div class="settings-group">
-        <label>Preprocessor Color</label>
+        <label>Preprocessor Color <small style="color:#888">.K .AS</small></label>
         <input type="color" id="set-preprocessorColor" value="${options?.preprocessorColor || '#8000ff'}">
       </div>
       <div class="settings-group">
-        <label>String Color</label>
+        <label>String Color <small style="color:#888">.O .AM</small></label>
         <input type="color" id="set-stringColor" value="${options?.stringColor || '#800000'}">
       </div>
     </div>
     <div class="settings-row">
       <div class="settings-group">
-        <label>Type Color</label>
+        <label>Type Color <small style="color:#888">.V .AN</small></label>
         <input type="color" id="set-typeColor" value="${options?.typeColor || '#008080'}">
       </div>
       <div class="settings-group">
-        <label>Operator Color</label>
+        <label>Operator Color <small style="color:#888">.R</small></label>
         <input type="color" id="set-operatorColor" value="${options?.operatorColor || '#0000ff'}">
       </div>
     </div>
     <div class="settings-row">
       <div class="settings-group">
-        <label>Comment Color</label>
+        <label>Comment Color <small style="color:#888">.AF</small></label>
         <input type="color" id="set-commentColor" value="${options?.commentColor || '#008000'}">
       </div>
       <div class="settings-group">
@@ -140,35 +156,35 @@ ${generateWebviewJs(isPublish)}
     </div>
     <div class="settings-row">
       <div class="settings-group">
-        <label>Yellow</label>
+        <label>Yellow <small style="color:#888">.bgYellow</small></label>
         <input type="color" id="set-bgYellow" value="${options?.bgYellow || '#cccc44'}">
       </div>
       <div class="settings-group">
-        <label>Red</label>
+        <label>Red <small style="color:#888">.bgRed</small></label>
         <input type="color" id="set-bgRed" value="${options?.bgRed || '#ff6666'}">
       </div>
       <div class="settings-group">
-        <label>Green</label>
+        <label>Green <small style="color:#888">.bgGreen</small></label>
         <input type="color" id="set-bgGreen" value="${options?.bgGreen || '#66cc66'}">
       </div>
     </div>
     <div class="settings-row">
       <div class="settings-group">
-        <label>Blue</label>
+        <label>Blue <small style="color:#888">.bgBlue</small></label>
         <input type="color" id="set-bgBlue" value="${options?.bgBlue || '#569cd6'}">
       </div>
       <div class="settings-group">
-        <label>Magenta</label>
+        <label>Magenta <small style="color:#888">.bgMagenta</small></label>
         <input type="color" id="set-bgMagenta" value="${options?.bgMagenta || '#ff66ff'}">
       </div>
       <div class="settings-group">
-        <label>Cyan</label>
+        <label>Cyan <small style="color:#888">.bgCyan</small></label>
         <input type="color" id="set-bgCyan" value="${options?.bgCyan || '#66ffff'}">
       </div>
     </div>
     <div class="settings-row">
       <div class="settings-group">
-        <label>Custom</label>
+        <label>Custom <small style="color:#888">.bgCustom</small></label>
         <input type="color" id="set-bgCustom" value="${options?.bgCustom || '#555555'}">
       </div>
     </div>
