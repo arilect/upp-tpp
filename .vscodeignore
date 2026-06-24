@@ -7,24 +7,27 @@ tsconfig.json
 .gitignore
 *.vsix
 QTF-summary.md
+AGENTS.md
 
-# ── Dev-only packages ──
-node_modules/typescript/**
-node_modules/@types/**
+# ── Exclude ALL node_modules, then re-include only runtime deps ──
+node_modules/**
 
-# ── Shiki: exclude all language/theme files, re-include only what we need ──
-node_modules/shiki/dist/langs/**
-node_modules/shiki/dist/themes/**
-node_modules/@shikijs/langs/**
-node_modules/@shikijs/themes/**
+# ── Shiki core (needed) ──
+!node_modules/shiki/package.json
+!node_modules/shiki/dist/
+!node_modules/@shikijs/core/package.json
+!node_modules/@shikijs/core/dist/
+!node_modules/@shikijs/types/package.json
+!node_modules/@shikijs/types/dist/
+!node_modules/@shikijs/vscode-textmate/package.json
+!node_modules/@shikijs/vscode-textmate/dist/
+!node_modules/@shikijs/engine-javascript/package.json
+!node_modules/@shikijs/engine-javascript/dist/
+!node_modules/@shikijs/engine-oniguruma/package.json
+!node_modules/@shikijs/engine-oniguruma/dist/
 
-# ── Re-include only the 4 languages + 1 theme we use ──
-!node_modules/shiki/dist/langs/c.mjs
-!node_modules/shiki/dist/langs/cpp.mjs
-!node_modules/shiki/dist/langs/sql.mjs
-!node_modules/shiki/dist/langs/json.mjs
-!node_modules/shiki/dist/themes/dark-plus.mjs
-!node_modules/shiki/dist/themes/light-plus.mjs
+# ── Shiki langs: only c, cpp, sql, json ──
+!node_modules/@shikijs/langs/package.json
 !node_modules/@shikijs/langs/dist/c.mjs
 !node_modules/@shikijs/langs/dist/c.d.mts
 !node_modules/@shikijs/langs/dist/cpp.mjs
@@ -33,7 +36,27 @@ node_modules/@shikijs/themes/**
 !node_modules/@shikijs/langs/dist/sql.d.mts
 !node_modules/@shikijs/langs/dist/json.mjs
 !node_modules/@shikijs/langs/dist/json.d.mts
+
+# ── Shiki themes: only dark-plus, light-plus ──
+!node_modules/@shikijs/themes/package.json
 !node_modules/@shikijs/themes/dist/dark-plus.mjs
 !node_modules/@shikijs/themes/dist/dark-plus.d.mts
 !node_modules/@shikijs/themes/dist/light-plus.mjs
 !node_modules/@shikijs/themes/dist/light-plus.d.mts
+
+# ── Oniguruma engine deps (needed by @shikijs/engine-oniguruma) ──
+!node_modules/oniguruma-to-es/package.json
+!node_modules/oniguruma-to-es/**/*.mjs
+!node_modules/oniguruma-to-es/**/*.js
+!node_modules/oniguruma-parser/package.json
+!node_modules/oniguruma-parser/**/*.mjs
+!node_modules/oniguruma-parser/**/*.js
+!node_modules/regex/package.json
+!node_modules/regex/**/*.mjs
+!node_modules/regex/**/*.js
+!node_modules/regex-recursion/package.json
+!node_modules/regex-recursion/**/*.mjs
+!node_modules/regex-recursion/**/*.js
+!node_modules/regex-utilities/package.json
+!node_modules/regex-utilities/**/*.mjs
+!node_modules/regex-utilities/**/*.js

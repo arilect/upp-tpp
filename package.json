@@ -1,7 +1,7 @@
 {
-  "name": "upp-tpp",
-  "displayName": "UPP TPP Preview",
-  "description": "Preview UPP Topic++ (.tpp) rich text files",
+  "name": "upp-topic",
+  "displayName": "U++ Topic++ search and browse",
+  "description": "Search, browse, and preview U++ Topic++ (.tpp) documentation in VS Code",
   "version": "0.8.1",
   "publisher": "arilect",
   "repository": {
