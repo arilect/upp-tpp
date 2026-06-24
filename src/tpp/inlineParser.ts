@@ -1,6 +1,6 @@
 import { decodeUppImage } from '../tppImages';
 import { escapeHtml, processUrlEscapes, processEscapes } from './escape';
-import { parseFormatCodes, styleToCss, styleToClass } from './formatCodes';
+import { parseFormatCodes, parseColor, styleToCss, styleToClass } from './formatCodes';
 import { isStyleDefinition } from './paragraphStyle';
 
 export function processInlineContent(text: string): string {
@@ -203,16 +203,15 @@ export function processInlineContent(text: string): string {
         result += `<div style="display:inline-block;border:1px dashed var(--tpp-border-color,#555);padding:4px 8px;color:var(--tpp-text-color,#999);font-size:12px;">[Image: ${w}x${h}]</div>`;
       }
     } else if (ch === '@') {
-      // @ in content: check for @(R.G.B) or @hex color command
+      // @ in content: consume @(colorCode) or @hex color command
       if (i + 1 < text.length && text[i + 1] === '(') {
         let j = i + 2;
         while (j < text.length && text[j] !== ')') j++;
         if (j < text.length && j > i + 2) {
-          const rgbContent = text.substring(i + 2, j);
-          const parts = rgbContent.split('.');
-          if (parts.length === 3 && parts.every(p => /^\d+$/.test(p))) {
-            const color = `rgb(${parts[0]},${parts[1]},${parts[2]})`;
-            i = j + 1;
+          const colorArg = text.substring(i + 2, j);
+          const color = parseColor(colorArg);
+          i = j + 1;
+          if (color) {
             // Read next text chunk to apply color to
             let textChunk = '';
             while (i < text.length && text[i] !== '[' && text[i] !== '&' && text[i] !== '{' && text[i] !== ']' && text[i] !== '@') {
@@ -227,6 +226,8 @@ export function processInlineContent(text: string): string {
             result += `<span style="color:${color}">${escapeHtml(processEscapes(textChunk))}</span>`;
             continue;
           }
+          // Unrecognized color — skip it silently
+          continue;
         }
       }
       result += '@';
