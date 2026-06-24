@@ -117,8 +117,8 @@ export function generateCss(options: TppRenderOptions | undefined, isPublish: bo
     .tpp-table-colored { background: var(--tpp-table-bg); border: 1px solid var(--tpp-table-bg); }
     .tpp-table td { padding: 8px 12px; vertical-align: top; border-bottom: 1px solid var(--tpp-border-color); }
     .tpp-table-colored td { border-bottom-color: rgba(0,0,0,0.15); }
-    .tpp-table-cell-key { padding: 8px 12px; font-family:var(--tpp-code-font); font-size:var(--tpp-code-font-size); font-weight: bold; white-space: nowrap; background: var(--tpp-table-bg); color: #000; }
-    .tpp-table-cell-desc { padding: 8px 12px; background: var(--tpp-table-bg); color: #000; }
+    .tpp-table-cell-key { padding: 8px 12px; font-family:var(--tpp-code-font); font-size:var(--tpp-code-font-size); font-weight: bold; white-space: nowrap; background: var(--tpp-table-bg); color: var(--tpp-text-color); }
+    .tpp-table-cell-desc { padding: 8px 12px; background: var(--tpp-table-bg); color: var(--tpp-text-color); }
     .shiki-wrapper { margin: 0.5em 0; border-radius: 6px; overflow: hidden; }
     .shiki-wrapper pre.shiki { background-color: var(--tpp-code-bg) !important; margin: 0; padding: 0 12px 12px 0; border-radius: 6px; overflow-wrap: break-word; word-wrap: break-word; white-space: pre-wrap; }
     a.l1 { text-decoration:none; font-size: 8pt; font-family: sans-serif; font-weight: normal; }
