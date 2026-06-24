@@ -2,7 +2,7 @@
   "name": "vscode-tpp-preview",
   "displayName": "UPP TPP Preview",
   "description": "Preview UPP Topic++ (.tpp) rich text files",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "publisher": "arilect",
   "repository": {
     "type": "git",
