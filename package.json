@@ -2,7 +2,7 @@
   "name": "upp-topic",
   "displayName": "U++ Topic++ search and browse",
   "description": "Search, browse, and preview U++ Topic++ (.tpp) documentation in VS Code",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "publisher": "arilect",
   "repository": {
     "type": "git",
