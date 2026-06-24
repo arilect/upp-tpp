@@ -7,7 +7,7 @@
 
 Browse and render Topic++ files with live HTML preview, syntax-highlighted code blocks, topic navigation, and full-text search — all without leaving VS Code.
 
-[**Install from VS Code Marketplace**](https://marketplace.visualstudio.com/items?itemName=arilect.vscode-tpp-preview)
+[**Install from VS Code Marketplace**](https://marketplace.visualstudio.com/items?itemName=arilect.upp-topic)
 
 > **Note:** Designed for U++ Topic++ documentation and help systems.
 
